@@ -3,10 +3,10 @@
 
 
 ## Contact Info 
-[Terem Website](https://www.terem-pro.ru/)
-[Whatsapp](https://wa.me/79855716153)
-[Viber](viber://chat?number=79855716153)
-[Telegram](https://t.me/Terem_chat)
+#### [Website](https://www.terem-pro.ru/)
+#### [Whatsapp](https://wa.me/79855716153)
+#### [Viber](viber://chat?number=79855716153)
+#### [Telegram](https://t.me/Terem_chat)
 ### issues
 - [ ] Make correct scaling
 - [ ] Fix a bug of incorrect table position.
