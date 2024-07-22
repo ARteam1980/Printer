@@ -7,4 +7,4 @@
 ### issues
 - [ ] Make correct scaling
 - [ ] Fix a bug of incorrect table position.
-![logo](C:/Users/Reva.A/Downloads/logo.png)
+![logo](https://github.com/ARteam1980/Printer/blob/main/logo.png)
