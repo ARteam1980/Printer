@@ -1,7 +1,10 @@
-# Terem's printer system
+# Terem Printer Syntax Tool
+## This tools allows you to make info cards for fast serice connection.
 
-> Manual changing printer ip system
 
-## ToDo
-- [ ] fix bugs
-- [ ] Make bar code implementation.
+## [Terem Website](https://www.terem-pro.ru/)
+
+### issues
+- [ ] Make correct scaling
+- [ ] Fix a bug of incorrect table position.
+![logo](C:/Users/Reva.A/Downloads/logo.png)
