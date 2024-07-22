@@ -2,10 +2,8 @@ import subprocess
 import sys
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-import os
 import json
 import re
-import time
 install('pillow')
 from PIL import Image
 from PIL import ImageFont
