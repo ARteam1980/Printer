@@ -1,4 +1,5 @@
 import subprocess
+import time
 import sys
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
@@ -37,7 +38,6 @@ def bigger(file, x_size, y_size, use_baw):
         fil = fil.convert('L').point(fn, mode='1')
     new = fil.resize((x_size,y_size))
     return(new)
-bigger('gfx.png', 1980, 1080, 0).save('amogus.png')
 #     if usage == 1:
 #         ar = '#bb0000'
 #     else:
@@ -98,8 +98,18 @@ po = 1080 * lo
 io = 1980 * lo
 bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
 while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
-    count += 1
     y = len(list(op[0]['Objects'])) * count
+    za = str(Make_inf(op[0]['destination_csv'])[count])
+    if count == len(list(op[0]['Objects'])) - 1:
+        count = 0
+        county + 1
+    if op[0]['Objects'][count]['Type'] == 'text':
+        p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), za, 20, 1980, 1080)
+        p.save(op[0]['dest_output'] + str(county) + "expl.png")
+        pass
+    if op[0]['Objects'][count]['Type'] == 'QR':
+        pass
+    count += 1
 # p = int(input("""Выберите режим использования
 # 1. Сгенерировать информацию.
 # 2. Сгенерировать Qr код.
