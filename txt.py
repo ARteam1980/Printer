@@ -37,7 +37,7 @@ def bigger(file, x_size, y_size, use_baw):
         fil = fil.convert('L').point(fn, mode='1')
     new = fil.resize((x_size,y_size))
     return(new)
-bigger('gfx2.png', 1980, 1080, 0).save('amogus.png')
+bigger('gfx.png', 1980, 1080, 0).save('amogus.png')
 #     if usage == 1:
 #         ar = '#bb0000'
 #     else:
@@ -96,35 +96,10 @@ def make_text(file, What_to_print, font_size, x, y):
 lo = int(op[0]["Scale_multiplyer"])
 po = 1080 * lo
 io = 1980 * lo
-bigger("gfx2.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
-while count != len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1:
+bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
+while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
     count += 1
     y = len(list(op[0]['Objects'])) * count
-    while coconut != y and True_count != len(Make_inf(str(op[0]['destination_csv']))):
-        if True_count == len(op[0]['Objects']):
-            True_count = 0
-        if bruh == len(op[0]['Objects']):
-            bruh = 0
-        Num = Make_It_Readable(str(Make_inf(str(op[0]['destination_csv']))[county]))
-        county += 1
-        la.append(Num)
-        y = op[0]['Objects'][bruh]["Type"]
-        if len(la) == len(op[0]['Objects']) + 1:
-            bigger("gfx2.png", po, io, int(op[0]["Use_company_colors"]))
-            while y == "QR" and omg != len(op[0]['Objects']):
-                p = la[omg]
-                print(p)
-                omg += 1
-                n_count += 1
-                if omg == len(op[0]['Objects']) and op[0]['Objects'] == 'Text':
-                    make_text(bigger("gfx2.png", io, po, int(op[0]["Use_company_colors"])), p, 200 * lo, 100 * lo, 200 * lo).save(op[0]['dest_output'] + "printer" + str(n_count) + ".png")
-            if True_count == len(op[0]['Objects']):
-                True_count = 0
-            True_count += 1
-            la = []
-            county -= 1
-            bruh += 1
-        coconut+=1
 # p = int(input("""Выберите режим использования
 # 1. Сгенерировать информацию.
 # 2. Сгенерировать Qr код.
