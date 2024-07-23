@@ -116,8 +116,8 @@ while count != len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects
                 print(p)
                 omg += 1
                 n_count += 1
-                if omg == len(op[0]['Objects']):
-                    make_QR(la,op[0]["Link"],make_text(bigger("gfx2.png", io, po, int(op[0]["Use_company_colors"])), p, 200 * lo, 100 * lo, 200 * lo),1300 * lo, 340 * lo).save(op[0]['dest_output'] + "printer" + str(n_count) + ".png")
+                if omg == len(op[0]['Objects']) and op[0]['Objects'] == 'Text':
+                    make_text(bigger("gfx2.png", io, po, int(op[0]["Use_company_colors"])), p, 200 * lo, 100 * lo, 200 * lo).save(op[0]['dest_output'] + "printer" + str(n_count) + ".png")
             if True_count == len(op[0]['Objects']):
                 True_count = 0
             True_count += 1
