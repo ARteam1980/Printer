@@ -104,7 +104,7 @@ while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['O
         count = 0
         county + 1
     if op[0]['Objects'][count]['Type'] == 'text':
-        p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), za, 20, 1980, 1080)
+        p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), za, 20, 200, 1200)
         p.save(op[0]['dest_output'] + str(county) + "expl.png")
         pass
     if op[0]['Objects'][count]['Type'] == 'QR':
