@@ -20,6 +20,10 @@ with open('cfg.json') as a:
     op = json.load(a)
 la = []
 la1 = []
+list2 = []
+garn47 = []
+pi = 0
+Tr_cntr = 0
 omg = 0
 True_count = 0
 global abba
@@ -56,7 +60,9 @@ def bigger(file, x_size, y_size, use_baw):
 #     return(z)
 def Make_It_Readable(x):
     # print(x.replace("""[""", """""").replace("""]""", """""").replace("""'""", """""").replace(""";""", """-"""))
-    return(x.replace("""[""", """""").replace("""]""", """""").replace("""'""", """""").replace(""" """, """""").replace("""'""", """""").replace(""",""", """ """))
+    return(x.replace("""[""", """""").replace("""]""", """""").replace("""'""", """""").replace(""" """, """
+""").replace("""'""", """""").replace(""",""", """ """).replace("""
+""", """"""))
 # # Make_It_Readable(y)
 # # Make_It_Readable(u)
 # # if False:   
@@ -78,7 +84,7 @@ def finnaly_make_it(x, y):
 #     with Image.open('QR.png') as QR:
 #         QR.load()
 #     QR.show()
-def make_QR(Info, Link, File, loc_x, loc_y):
+def make_QR(File, Info, Link, loc_x, loc_y):
     img = qrcode.make(str(Info) + " visit us at: " + Link)
     img.save("QR.png")
     og = File
@@ -99,27 +105,37 @@ io = 1980 * lo
 bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
 while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
     y = len(list(op[0]['Objects'])) * count
-    za = str(Make_inf(op[0]['destination_csv'])[count])
-    if count == len(list(op[0]['Objects'])) - 1:
-        count = 0
-        county + 1
-    if op[0]['Objects'][count]['Type'] == 'text':
-        p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), za, 20, 200, 1200)
-        p.save(op[0]['dest_output'] + str(county) + "expl.png")
-        pass
-    if op[0]['Objects'][count]['Type'] == 'QR':
-        pass
+    za = Make_It_Readable(str(Make_inf(op[0]['destination_csv'])[county]))
+    if count != len(list(op[0]['Objects'])):
+        county += 1
+        if op[0]['Objects'][count]['Type'] == 'text':
+            list2.append(za)
+            list2.append('text')
+        if op[0]['Objects'][count]['Type'] == 'QR':
+            list2.append(za)
+            list2.append('QR')
+        if op[0]['Objects'][count]['Type'] == 'DATA':
+            list2.append(za)
+            list2.append('DATA')
+            print(za)
+    else:
+        for i in range(len(list2)-1):
+            if n_count == 0:
+                n_count += 1
+            n_count += 2
+            print(list2[n_count])
+            if list2[n_count] == 'text':
+                while len(garn47) != len(op[0]['Objects']):
+                    garn47.append(list2[pi])
+                    pi += 2
+                p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(Make_It_Readable(str(garn47))), 50, 200, 200)
+                p.save(op[0]["dest_output"] + "lan.png")
+            if list2[n_count] == 'QR':
+                pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), list[Tr_cntr], op[0]['Link'], 1300, 200)
+                pa.save(op[0]["dest_output"] + "printer.png")
+            Tr_cntr += 1
+            count = 0
+            if n_count == len(list2)-1:
+                n_count = 0
+                break
     count += 1
-# p = int(input("""Выберите режим использования
-# 1. Сгенерировать информацию.
-# 2. Сгенерировать Qr код.
-# 3. Сделать визитные карточки:  """))
-# if(p==1):
-#     print(Make_inf)
-# if(p==2):
-#     make_QR(input())
-# while p == 3:
-#     make_img()
-#     print('Сделать ещё?')
-#     N += 43
-#     time.sleep(5)
