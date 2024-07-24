@@ -19,9 +19,12 @@ from io import StringIO
 with open('cfg.json') as a:
     op = json.load(a)
 la = []
+so_many_of_them = 0
 la1 = []
 list2 = []
 garn47 = []
+za_count = 0
+list3 = []
 pi = 0
 Tr_cntr = 0
 omg = 0
@@ -106,36 +109,41 @@ bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
 while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
     y = len(list(op[0]['Objects'])) * count
     za = Make_It_Readable(str(Make_inf(op[0]['destination_csv'])[county]))
-    if count != len(list(op[0]['Objects'])):
+    if za_count != len(list(op[0]['Objects'])):
         county += 1
-        if op[0]['Objects'][count]['Type'] == 'text':
+        if op[0]['Objects'][za_count]['Type'] == 'text':
             list2.append(za)
             list2.append('text')
-        if op[0]['Objects'][count]['Type'] == 'QR':
+        if op[0]['Objects'][za_count]['Type'] == 'QR':
             list2.append(za)
             list2.append('QR')
-        if op[0]['Objects'][count]['Type'] == 'DATA':
+        if op[0]['Objects'][za_count]['Type'] == 'DATA':
             list2.append(za)
             list2.append('DATA')
-            print(za)
+        za_count += 1
     else:
+        print(list2)
         for i in range(len(list2)-1):
             if n_count == 0:
                 n_count += 1
             n_count += 2
             print(list2[n_count])
             if list2[n_count] == 'text':
-                while len(garn47) != len(op[0]['Objects']):
-                    garn47.append(list2[pi])
-                    pi += 2
-                p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(Make_It_Readable(str(garn47))), 50, 200, 200)
-                p.save(op[0]["dest_output"] + "lan.png")
+                list3.append(list2[so_many_of_them])
+                so_many_of_them +=1
+                if len(list3) == len(list2) / 2:
+                    p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), 50, 200, 200)
+                    True_count += 1
             if list2[n_count] == 'QR':
-                pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), list[Tr_cntr], op[0]['Link'], 1300, 200)
-                pa.save(op[0]["dest_output"] + "printer.png")
+                pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), op[0]['Link'], 1300, 200)
+                pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+                True_count += 1
             Tr_cntr += 1
             count = 0
             if n_count == len(list2)-1:
                 n_count = 0
-                break
+            if p != 0:
+                p.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+        za_count = 0
+        list2 = []
     count += 1
