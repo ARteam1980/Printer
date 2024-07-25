@@ -8,6 +8,7 @@
 #### [Viber](viber://chat?number=79855716153)
 #### [Telegram](https://t.me/Terem_chat)
 ## issues
-- [ ] Make correct scaling
-- [ ] Fix a bug of incorrect table position.
+- [x] Make correct scaling.
+- [x] Fix a bug of incorrect table position.
+- [ ] Make correct func reading.
 ![logo](https://github.com/ARteam1980/Printer/blob/main/logo.png)
