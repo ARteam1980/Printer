@@ -18,6 +18,8 @@ import qrcode
 from io import StringIO
 with open('cfg.json') as a:
     op = json.load(a)
+p = 0
+pa = 0
 la = []
 so_many_of_them = 0
 la1 = []
@@ -25,9 +27,12 @@ list2 = []
 garn47 = []
 za_count = 0
 list3 = []
+list4 = []
 pi = 0
+aaaa = 0
 Tr_cntr = 0
 omg = 0
+omg1 = 0
 True_count = 0
 global abba
 count = 0
@@ -106,6 +111,7 @@ lo = int(op[0]["Scale_multiplyer"])
 po = 1080 * lo
 io = 1980 * lo
 bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
+o = int(input("Uhhh"))
 while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
     y = len(list(op[0]['Objects'])) * count
     za = Make_It_Readable(str(Make_inf(op[0]['destination_csv'])[county]))
@@ -122,28 +128,47 @@ while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['O
             list2.append('DATA')
         za_count += 1
     else:
-        print(list2)
         for i in range(len(list2)-1):
             if n_count == 0:
                 n_count += 1
             n_count += 2
-            print(list2[n_count])
             if list2[n_count] == 'text':
-                list3.append(list2[so_many_of_them])
-                so_many_of_them +=1
+                print(list4)
+                list3.append(list2[omg])
                 if len(list3) == len(list2) / 2:
-                    p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), 50, 200, 200)
-                    True_count += 1
+                    p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list3), 50, 200, 200)
+                    list3 = []
             if list2[n_count] == 'QR':
-                pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), op[0]['Link'], 1300, 200)
-                pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
-                True_count += 1
+                list4.append(list2[omg])
+                if len(list4) == len(list2) / 2:
+                    print(list4)
+                    if p == 0:
+                        pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list4), op[0]['Link'], 1300, 200)
+                    else:
+                        pa = make_QR(p, str(list4), op[0]['Link'], 1300, 200)
+                    True_count += 1
+                    list4 = []
             Tr_cntr += 1
+            aaaa += 1
             count = 0
             if n_count == len(list2)-1:
                 n_count = 0
-            if p != 0:
-                p.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+            if o == 1:
+                if p != 0 and pa == 0:
+                    p.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+                    p = 0
+                    True_count += 1
+                if pa != 0 and p == 0:
+                    pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+                    pa = 0
+                    True_count += 1
+                if p != 0 and pa != 0:
+                    pa(p).save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+            omg += 2
+            if aaaa >= len(list2) - 2:
+                aaaa = 0
+            if omg == len(list2):
+                omg = 0
         za_count = 0
         list2 = []
     count += 1
