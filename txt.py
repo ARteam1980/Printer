@@ -9,6 +9,7 @@ import json
 import re
 install('pillow')
 from PIL import Image
+from PIL import ImageTk
 from PIL import ImageFont
 from PIL import ImageDraw
 install('numpy')
@@ -43,9 +44,10 @@ county = 3
 bruh = 0
 coconut = 0
 root = tk.Tk()
+def show_message():
+    label["text"] = entry.get()
 root.geometry("320x320")
 placeholder = 'Input your preset loc.'
-
 def erase(event=None):
     if e.get() == placeholder:
         e.delete(0,'end')
@@ -53,25 +55,23 @@ def add(event=None):
     if e.get() == '':
         e.insert(0,placeholder)
 def erase(event=None):
-    if d.get() == placeholder:
-        d.delete(0,'end')
+    if f.get() == placeholder:
+        f.delete(0,'end')
 def add(event=None):
-    if d.get() == '':
-        d.insert(0,placeholder)
+    if f.get() == '':
+        f.insert(0,placeholder)
 
 e = tk.Entry(root)
 e.pack(padx=10,pady=10)
+f = tk.Entry(root)
+f.pack(padx=10,pady=10)
 add()
 e.bind('<FocusIn>',erase)
 e.bind('<FocusOut>',add)
-
-d = tk.Entry(root)
-d.pack(padx=10,pady=10)
-add()
-d.bind('<FocusIn>',erase)
-d.bind('<FocusOut>',add)
+f.bind('<FocusIn>',erase)
+f.bind('<FocusOut>',add)
 root.mainloop()
-# u = "agawa;aragwa;wawa;bauwa"
+# u = "agawa;aragwa;wawa;bauwa" 
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
         fil.load()
