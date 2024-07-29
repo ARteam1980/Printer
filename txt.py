@@ -3,6 +3,8 @@ import time
 import sys
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+install("tk")
+import tkinter as tk
 import json
 import re
 install('pillow')
@@ -40,6 +42,35 @@ n_count = 0
 county = 3
 bruh = 0
 coconut = 0
+root = tk.Tk()
+root.geometry("320x320")
+placeholder = 'Input your preset loc.'
+
+def erase(event=None):
+    if e.get() == placeholder:
+        e.delete(0,'end')
+def add(event=None):
+    if e.get() == '':
+        e.insert(0,placeholder)
+def erase(event=None):
+    if d.get() == placeholder:
+        d.delete(0,'end')
+def add(event=None):
+    if d.get() == '':
+        d.insert(0,placeholder)
+
+e = tk.Entry(root)
+e.pack(padx=10,pady=10)
+add()
+e.bind('<FocusIn>',erase)
+e.bind('<FocusOut>',add)
+
+d = tk.Entry(root)
+d.pack(padx=10,pady=10)
+add()
+d.bind('<FocusIn>',erase)
+d.bind('<FocusOut>',add)
+root.mainloop()
 # u = "agawa;aragwa;wawa;bauwa"
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
@@ -110,7 +141,7 @@ def make_text(file, What_to_print, font_size, x, y):
 lo = int(op[0]["Scale_multiplyer"])
 po = 1080 * lo
 io = 1980 * lo
-bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
+bigger(op[0]["destination_preset"], po, io, int(op[0]["Use_company_colors"])).save('another.png')
 o = int(input("Uhhh"))
 while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
     y = len(list(op[0]['Objects'])) * count
@@ -163,7 +194,10 @@ while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['O
                     pa = 0
                     True_count += 1
                 if p != 0 and pa != 0:
-                    pa(p).save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+                    pa().save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+                    p = 0
+                    pa = 0
+                    True_count += 1
             omg += 2
             if aaaa >= len(list2) - 2:
                 aaaa = 0
