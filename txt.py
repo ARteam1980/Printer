@@ -84,7 +84,9 @@ io = 1980 * lo
 bigger(op[0]["destination_preset"], po, io, int(op[0]["Use_company_colors"])).save('another.png')
 o = int(input("Uhhh"))
 while True:
-    Make_inf("Printer.csv")
+    y = Make_inf("Printer.csv")
+    for rows in y:
+        print("hi")
 # while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
 #     y = len(list(op[0]['Objects'])) * count
 #     za = Make_It_Readable(str(Make_inf(op[0]['destination_csv'])[county]))
