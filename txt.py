@@ -1,13 +1,18 @@
-import subprocess
+ #! Библиотеки
+from collections import defaultdict
 import csv
+import subprocess
 import time
 import sys
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+install("tk")
+import tkinter as tk
 import json
 import re
 install('pillow')
 from PIL import Image
+from PIL import ImageTk
 from PIL import ImageFont
 from PIL import ImageDraw
 install('numpy')
@@ -19,6 +24,8 @@ import qrcode
 from io import StringIO
 with open('cfg.json') as a:
     op = json.load(a)
+p = 0
+pa = 0
 la = []
 so_many_of_them = 0
 la1 = []
@@ -26,9 +33,11 @@ list2 = []
 garn47 = []
 za_count = 0
 list3 = []
-pi = 0
+list4 = []
+dara = 0
 Tr_cntr = 0
 omg = 0
+omg1 = 0
 True_count = 0
 global abba
 count = 0
@@ -36,7 +45,7 @@ n_count = 0
 county = 3
 bruh = 0
 coconut = 0
-# u = "agawa;aragwa;wawa;bauwa"
+#? Создание изображения с определённым размером и использованием чб
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
         fil.load()
@@ -46,46 +55,12 @@ def bigger(file, x_size, y_size, use_baw):
         fil = fil.convert('L').point(fn, mode='1')
     new = fil.resize((x_size,y_size))
     return(new)
-#     if usage == 1:
-#         ar = '#bb0000'
-#     else:
-#         ar = '#000000'
-#     dwg = open(file, "w")
-#     dwg.write(f"""<?xml version="1.0" encoding="utf-8" ?>
-# <svg baseProfile="basic" height="{x_scale}" version="1.1" width="{y_scale}" xmlns="http://www.w3.org/2000/svg"
-#     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
-#     <defs />
-#     <rect fill="white" height="{x_scale}" stroke="{ar}" width="{y_scale}" x="0" y="0" />
-# </svg>""")
-#     dwg.close()
-#     drawing = svg2rlg(file)
-#     renderPM.drawToFile(drawing, "file.png", fmt="PNG")
-#     z = open('file.png')
-#     return(z)
-def Make_It_Readable(x):
-    # print(x.replace("""[""", """""").replace("""]""", """""").replace("""'""", """""").replace(""";""", """-"""))
-    return(x.replace("""[""", """""").replace("""]""", """""").replace("""'""", """""").replace(""" """, """
-""").replace("""'""", """""").replace(""",""", """ """).replace("""
-""", """"""))
-# # Make_It_Readable(y)
-# # Make_It_Readable(u)
-# # if False:   
-# N = 0
+#* Создаёт словарь из csv файла
 def Make_inf(x):
-    x = open(x, encoding='utf-8')
-    file_reader = csv.DictReader(x, delimiter = ";")
+    y = open(x, encoding='utf-8')
+    file_reader = csv.DictReader(y, delimiter = ";")
     return(file_reader)
-        # for row in file_reader:
-        #     print(f' {row["ID"]} - {row["IP"]} - {row["MAC"]} - {row["SN"]}')
-def finnaly_make_it(x, y):
-    z = x[y]
-# def make_QR(x):
-#     img = qrcode.make(x)
-#     type(img)
-#     img.save("QR.png")
-#     with Image.open('QR.png') as QR:
-#         QR.load()
-#     QR.show()
+#* Создаёт QR код из исходного изображения
 def make_QR(File, Info, Link, loc_x, loc_y):
     img = qrcode.make(str(Info) + " visit us at: " + Link)
     img.save("QR.png")
@@ -94,24 +69,30 @@ def make_QR(File, Info, Link, loc_x, loc_y):
         QR.load()
     og.paste(QR, (loc_x, loc_y))
     return(og)
-def make_text(file, What_to_print, font_size, x, y):
-    Font = ImageFont.truetype("C:/Users/Reva.A/The_installation/ok.ttf", size=font_size)
+#* Добавляет текст на изображение
+def make_text(file, What_to_print, font_size, x, y, font_loc):
+    Font = ImageFont.truetype(font_loc, size=font_size)
     drawText = ImageDraw.Draw(file)
-    drawText.text((x,y), Make_It_Readable(str(What_to_print)), fill=('#ae0817'), font=Font, spacing=100)
+    drawText.text((x,y), What_to_print, fill=('#ae0817'), font=Font, spacing=100)
     file.save("Preset.png")
     x = Image.open("Preset.png")
     return(x)
 lo = int(op[0]["Scale_multiplyer"])
 po = 1080 * lo
 io = 1980 * lo
-# bigger("gfx.png", po, io, int(op[0]["Use_company_colors"])).save('another.png')
+abba = bigger(op[0]["destination_preset"], po, io, int(op[0]["Use_company_colors"]))
+columns = defaultdict(list)
+pla = Make_inf("Printer.csv")
 while True:
+    #! Trying to make printing
     for row in Make_inf("printer.csv"):
-        if count < len(op[0]["Objects"]):
-            if op[0]['Objects'][count]['Type'] == "text":
-                print(f"{row[op[0]['Objects'][count]]}")
-            if op[0]['Objects'][count]['Type'] == "text":
-                print(f"{row[op[0]['Objects'][count]]}")
+        if count >= len(op[0]['Objects']):
+            count = 0
+        if op[0]['Objects'][count]['Type'] == "text":
+            make_text(abba, row["IP"], 20, 200, 1200)
+        if op[0]['Objects'][count]['Type'] == "QR":
+            make_text(abba, row["ID"], 20, 200, 1200)
+        print(f"{op[0]['Objects'][count]["Type"]}")
         count += 1
 # while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
 #     y = len(list(op[0]['Objects'])) * count
@@ -129,28 +110,50 @@ while True:
 #             list2.append('DATA')
 #         za_count += 1
 #     else:
-#         print(list2)
 #         for i in range(len(list2)-1):
 #             if n_count == 0:
 #                 n_count += 1
 #             n_count += 2
-#             print(list2[n_count])
 #             if list2[n_count] == 'text':
-#                 list3.append(list2[so_many_of_them])
-#                 so_many_of_them +=1
+#                 print(list4)
+#                 list3.append(list2[omg])
 #                 if len(list3) == len(list2) / 2:
-#                     p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), 50, 200, 200)
-#                     True_count += 1
+#                     p = make_text(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list3), 50, 200, 200)
+#                     list3 = []
 #             if list2[n_count] == 'QR':
-#                 pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list2), op[0]['Link'], 1300, 200)
-#                 pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
-#                 True_count += 1
+#                 list4.append(list2[omg])
+#                 if len(list4) == len(list2) / 2:
+#                     print(list4)
+#                     if p == 0:
+#                         pa = make_QR(bigger(op[0]['destination_preset'], 1980 * int(op[0]['Scale_multiplyer']), 1080 * int(op[0]['Scale_multiplyer']), op[0]['Use_company_colors']), str(list4), op[0]['Link'], 1300, 200)
+#                     else:
+#                         pa = make_QR(p, str(list4), op[0]['Link'], 1300, 200)
+#                     True_count += 1
+#                     list4 = []
 #             Tr_cntr += 1
+#             aaaa += 1
 #             count = 0
 #             if n_count == len(list2)-1:
 #                 n_count = 0
-#             if p != 0:
-#                 p.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+#             if o == 1:
+#                 if p != 0 and pa == 0:
+#                     p.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+#                     p = 0
+#                     True_count += 1
+#                 if pa != 0 and p == 0:
+#                     pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+#                     pa = 0
+#                     True_count += 1
+#                 if p != 0 and pa != 0:
+#                     pa.save(op[0]["dest_output"] + "printer"  + str(True_count) + ".png")
+#                     p = 0
+#                     pa = 0
+#                     True_count += 1
+#             omg += 2
+#             if aaaa >= len(list2) - 2:
+#                 aaaa = 0
+#             if omg == len(list2):
+#                 omg = 0
 #         za_count = 0
 #         list2 = []
 #     count += 1
