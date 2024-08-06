@@ -1,4 +1,6 @@
  #! Библиотеки
+import barcode
+from barcode.writer import ImageWriter
 from collections import defaultdict
 import csv
 import subprocess
@@ -10,6 +12,7 @@ install("tk")
 import tkinter as tk
 import json
 import re
+ta = []
 install('pillow')
 from PIL import Image
 from PIL import ImageTk
@@ -26,9 +29,13 @@ with open('cfg.json') as a:
     op = json.load(a)
 p = 0
 pa = 0
+to = 0
+ta = 0
+ratatata = 0
 la = []
 so_many_of_them = 0
 la1 = []
+more = 0
 list2 = []
 garn47 = []
 za_count = 0
@@ -46,6 +53,11 @@ county = 3
 bruh = 0
 coconut = 0
 #? Создание изображения с определённым размером и использованием чб
+def Make_Bar(file, what_to_print, protocol, loc_x, loc_y):
+    EAN = barcode.get_barcode_class(protocol)
+    my_ean = EAN(str(what_to_print), writer=ImageWriter())
+    zb = Image.open(file)
+    zb.paste(my_ean, (loc_x, loc_y))
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
         fil.load()
@@ -74,26 +86,42 @@ def make_text(file, What_to_print, font_size, x, y, font_loc):
     Font = ImageFont.truetype(font_loc, size=font_size)
     drawText = ImageDraw.Draw(file)
     drawText.text((x,y), What_to_print, fill=('#ae0817'), font=Font, spacing=100)
-    file.save("Preset.png")
-    x = Image.open("Preset.png")
-    return(x)
+    return(file)
 lo = int(op[0]["Scale_multiplyer"])
-po = 1080 * lo
-io = 1980 * lo
+po = 1980 * lo
+io = 1080 * lo
 abba = bigger(op[0]["destination_preset"], po, io, int(op[0]["Use_company_colors"]))
 columns = defaultdict(list)
 pla = Make_inf("Printer.csv")
+lern = int(input("Do you want to debug?: "))
 while True:
     #! Trying to make printing
     for row in Make_inf("printer.csv"):
         if count >= len(op[0]['Objects']):
             count = 0
         if op[0]['Objects'][count]['Type'] == "text":
-            make_text(abba, row["IP"], 20, 200, 1200)
+            list2.append(row[op[0]["Objects"][count]["Name"]])
         if op[0]['Objects'][count]['Type'] == "QR":
-            make_text(abba, row["ID"], 20, 200, 1200)
+            list3.append(row[op[0]["Objects"][count]["Name"]])
+        if op[0]['Objects'][count]['Type'] == "Bar":
+            list4.append(row[op[0]["Objects"][count]["Name"]])
+        if count == len(op[0]['Objects']) - 1: 
+            if list2 != 0:
+                make_text(abba, str(list2), op[0]["Objects"][ratatata]["Font_Size"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"], op[0]["font_loc"]).save(f"printer{ratatata}.png")
+                ratatata += 1
+            if list3 != 0:
+                make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"]).save(f"printer{ratatata}.png")
+                ratatata += 1
+            if list4 != 0:
+                Make_Bar(abba, int(str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", "")), op[0]["Protocol"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"]).save(f"printer{ratatata}.png")
+                ratatata += 1
+        if count >= len(op[0]['Objects']):
+            count = 0
         print(f"{op[0]['Objects'][count]["Type"]}")
+        to = 0
+        ta = 0
         count += 1
+        more += 0
 # while count != round(len(Make_inf(str(op[0]['destination_csv']))) / len(op[0]['Objects']) - 1):
 #     y = len(list(op[0]['Objects'])) * count
 #     za = Make_It_Readable(str(Make_inf(op[0]['destination_csv'])[county]))
