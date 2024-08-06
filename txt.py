@@ -56,7 +56,7 @@ coconut = 0
 def Make_Bar(file, what_to_print, protocol, loc_x, loc_y):
     EAN = barcode.get_barcode_class(protocol)
     my_ean = EAN(str(what_to_print), writer=ImageWriter())
-    zb = Image.open(file)
+    zb = file
     zb.paste(my_ean, (loc_x, loc_y))
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
