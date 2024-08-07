@@ -58,6 +58,7 @@ def Make_Bar(file, what_to_print, protocol, loc_x, loc_y):
     my_ean = EAN(str(what_to_print), writer=ImageWriter())
     zb = file
     zb.paste(my_ean, (loc_x, loc_y))
+    return(zb)
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
         fil.load()
@@ -76,11 +77,10 @@ def Make_inf(x):
 def make_QR(File, Info, Link, loc_x, loc_y):
     img = qrcode.make(str(Info) + " visit us at: " + Link)
     img.save("QR.png")
-    og = File
     with Image.open("QR.png") as QR:
         QR.load()
-    og.paste(QR, (loc_x, loc_y))
-    return(og)
+    File.paste(QR, (loc_x, loc_y))
+    return(File)
 #* Добавляет текст на изображение
 def make_text(file, What_to_print, font_size, x, y, font_loc):
     Font = ImageFont.truetype(font_loc, size=font_size)
@@ -107,13 +107,14 @@ while True:
             list4.append(row[op[0]["Objects"][count]["Name"]])
         if count == len(op[0]['Objects']) - 1: 
             if list2 != 0:
-                make_text(abba, str(list2), op[0]["Objects"][ratatata]["Font_Size"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"], op[0]["font_loc"]).save(f"printer{ratatata}.png")
+                make_text(abba, str(list2), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]).save(f"printer{ratatata}.png")
                 ratatata += 1
             if list3 != 0:
-                make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"]).save(f"printer{ratatata}.png")
+                make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(f"printer{ratatata}.png")
                 ratatata += 1
             if list4 != 0:
-                Make_Bar(abba, int(str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", "")), op[0]["Protocol"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"]).save(f"printer{ratatata}.png")
+                print(int(str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", "")))
+                Make_Bar(abba, str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", ""), op[0]["Protocol"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(f"printer{ratatata}.png")
                 ratatata += 1
         if count >= len(op[0]['Objects']):
             count = 0
