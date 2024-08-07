@@ -1,0 +1,50 @@
+[
+    {
+        "destination_csv": "C:/Users/Reva.A/Printer/printer.csv",
+        "destination_preset": "C:/Users/Reva.A/Printer/gfx.png",
+        "dest_output": "C:/Users/Reva.A/Printer/",
+        "font_loc": "C:/Users/Reva.A/Downloads/ok.ttf",
+        "Protocol": "ean8",
+        "Save_rudements": "0",
+        "Objects": [
+            {
+            "Name": "ID",
+            "Type": "text",
+            "Font_Size": 12,
+            "loc_x": 1980,
+            "loc_y": 1080
+            },
+            {
+            "Name": "IP",
+            "Type": "text",
+            "Font_Size": 12,
+            "loc_x": 1980,
+            "loc_y": 1080
+            },
+            {
+            "Name": "MAC",
+            "Type": "text",
+            "Font_Size": 12,
+            "loc_x": 1980,
+            "loc_y": 1080
+            },
+            {
+            "Name": "SN",
+            "Type": "text",
+            "Font_Size": 12,
+            "loc_x": 1980,
+            "loc_y": 1080
+            },
+            {
+            "Name": "Bar",
+            "Type": "Bar",
+            "Font_Size": 12,
+            "loc_x": 1980,
+            "loc_y": 1080
+            }
+],
+"Use_company_colors": "0",
+"Link": "http://192.168.50.1",
+"Scale_multiplyer": "1"
+}
+]
