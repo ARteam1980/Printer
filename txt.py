@@ -56,8 +56,10 @@ coconut = 0
 def Make_Bar(file, what_to_print, protocol, loc_x, loc_y):
     EAN = barcode.get_barcode_class(protocol)
     my_ean = EAN(str(what_to_print), writer=ImageWriter())
+    my_ean.save("bar")
+    p = Image.open("bar.png")
     zb = file
-    zb.paste(my_ean, (loc_x, loc_y))
+    zb.paste(p, (loc_x, loc_y))
     return(zb)
 def bigger(file, x_size, y_size, use_baw):
     with Image.open(file) as fil:
@@ -107,15 +109,16 @@ while True:
             list4.append(row[op[0]["Objects"][count]["Name"]])
         if count == len(op[0]['Objects']) - 1: 
             if list2 != 0:
-                make_text(abba, str(list2), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]).save(f"printer{ratatata}.png")
-                ratatata += 1
+                make_text(abba,str(list2).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
+""").replace(""",""", ""), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
+                list2 = []
             if list3 != 0:
-                make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(f"printer{ratatata}.png")
-                ratatata += 1
+                make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
+                list3 = []
             if list4 != 0:
-                print(int(str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", "")))
-                Make_Bar(abba, str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", ""), op[0]["Protocol"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(f"printer{ratatata}.png")
-                ratatata += 1
+                Make_Bar(abba, str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", ""), op[0]["Protocol"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
+                list4 = []
+            ratatata += 1
         if count >= len(op[0]['Objects']):
             count = 0
         print(f"{op[0]['Objects'][count]["Type"]}")
