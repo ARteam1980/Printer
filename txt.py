@@ -108,14 +108,14 @@ while True:
         if op[0]['Objects'][count]['Type'] == "Bar":
             list4.append(row[op[0]["Objects"][count]["Name"]])
         if count == len(op[0]['Objects']) - 1: 
-            if list2 != 0:
+            if list2 != []:
                 make_text(abba,str(list2).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
 """).replace(""",""", ""), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
                 list2 = []
-            if list3 != 0:
+            if list3 != []:
                 make_QR(abba, str(list3), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
                 list3 = []
-            if list4 != 0:
+            if list4 != []:
                 Make_Bar(abba, str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", ""), op[0]["Protocol"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
                 list4 = []
             ratatata += 1
