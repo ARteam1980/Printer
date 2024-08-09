@@ -27,6 +27,10 @@ import qrcode
 from io import StringIO
 with open('cfg.json') as a:
     op = json.load(a)
+list5 = []
+list6 = []
+list7 = []
+list8 = []
 p = 0
 pa = 0
 to = 0
@@ -107,6 +111,14 @@ while True:
             list3.append(row[op[0]["Objects"][count]["Name"]])
         if op[0]['Objects'][count]['Type'] == "Bar":
             list4.append(row[op[0]["Objects"][count]["Name"]])
+        if op[0]['Objects'][count]['Type'] == "text_QR":
+            list5.append(row[op[0]["Objects"][count]["Name"]])
+        if op[0]['Objects'][count]['Type'] == "text_Bar":
+            list6.append(row[op[0]["Objects"][count]["Name"]])
+        if op[0]['Objects'][count]['Type'] == "QR_Bar":
+            list7.append(row[op[0]["Objects"][count]["Name"]])
+        if op[0]['Objects'][count]['Type'] == "text_QR_Bar":
+            list8.append(row[op[0]["Objects"][count]["Name"]])
         if count == len(op[0]['Objects']) - 1: 
             if list2 != []:
                 make_text(abba,str(list2).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
@@ -118,9 +130,26 @@ while True:
             if list4 != []:
                 Make_Bar(abba, str(list4).replace("""'""", "").replace("""[""", "").replace("""]""", ""), op[0]["Protocol"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]).save(op[0]["dest_output"] + f"printer{ratatata}.png")
                 list4 = []
+            if list5 != []:
+                make_QR(make_text(abba,str(list5).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
+""").replace(""",""", ""), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]), str(list5).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""",""", ""), op[0]["Link"], op[0]["Objects"][ratatata]["loc_x"], op[0]["Objects"][ratatata]["loc_y"])
+                list5 = []
+            if list6 != []:
+                Make_Bar(make_text(abba,str(list6).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
+""").replace(""",""", ""), op[0]["Objects"][count]["Font_Size"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"], op[0]["font_loc"]), str(list6).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""",""", ""), op[0]["Protocol"], 1200, 200)
+                list6 = []
+            if list7 != []:
+                Make_Bar(make_QR(abba,str(list7).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
+""").replace(""",""", ""), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]), str(list7).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""",""", ""), op[0]["Protocol"], 1200, 200)
+                list7 = []
+            if list8 != []:
+                Make_Bar(make_QR(abba,str(list7).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""" """, """
+""").replace(""",""", ""), op[0]["Link"], op[0]["Objects"][count]["loc_x"], op[0]["Objects"][count]["loc_y"]), str(list7).replace("""'""", "").replace("""[""", "").replace("""]""", "").replace(""",""", ""), op[0]["Protocol"], 1200, 200)
+                list8 = []
             ratatata += 1
         if count >= len(op[0]['Objects']):
             count = 0
+            
         print(f"{op[0]['Objects'][count]["Type"]}")
         to = 0
         ta = 0
