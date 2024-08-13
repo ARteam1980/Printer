@@ -101,7 +101,7 @@ columns = defaultdict(list)
 pla = Make_inf("Printer.csv")
 lern = int(input("Do you want to debug?: "))
 while True:
-    #! Trying to make printing
+    #! The part that needs editing. We need to create the cycle that comepletly disolves the need of creating combined functions.
     for row in Make_inf("printer.csv"):
         if count >= len(op[0]['Objects']):
             count = 0
